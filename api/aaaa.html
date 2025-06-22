@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Licznik odwiedzin (Lokalnie)</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+        h1 { color: #0078d7; }
+        #counter { font-size: 48px; margin: 20px 0; }
+        button { padding: 10px 20px; background: #0078d7; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Licznik odwiedzin</h1>
+    <div id="counter">Ładowanie...</div>
+    <button onclick="location.reload()">Odśwież</button>
+
+    <script>
+        // Ten kod uruchomi się, gdy cała strona HTML zostanie załadowana
+        document.addEventListener('DOMContentLoaded', () => {
+            const counterElement = document.getElementById('counter'); // Pobieramy element, gdzie wyświetlimy licznik
+            
+            // Pobieramy wartość licznika z pamięci przeglądarki (localStorage)
+            // Jeśli jeszcze nie ma tam żadnej wartości, ustawiamy ją na 0
+            let count = parseInt(localStorage.getItem('visitCount')) || 0; 
+
+            count++; // Zwiększamy licznik o 1 przy każdym załadowaniu strony
+
+            // Zapisujemy nową wartość licznika z powrotem do pamięci przeglądarki
+            localStorage.setItem('visitCount', count); 
+
+            // Wyświetlamy zaktualizowany licznik na stronie
+            counterElement.innerHTML = `Odwiedziny: ${count}`; 
+        });
+    </script>
+</body>
+</html>
